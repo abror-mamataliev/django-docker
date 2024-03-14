@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: backend
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+#    volumes:
+#      - .:/app
+#      - static:/static
+  db:
+    container_name: db
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    image: postgis/postgis:13-3.4-alpine
+    ports:
+      - "5438:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+#  nginx:
+#    build: ./nginx
+#    container_name: nginx
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./nginx:/etc/nginx/conf.d
+#      - static:/static
+#    depends_on:
+#      - backend
+
+volumes:
+  db-data:
+#  static:

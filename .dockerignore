@@ -1,0 +1,12 @@
+__pycache__/
+.vscode/
+.idea/
+
+env/
+venv/
+
+.DS_Store
+*.env
+*.lock
+
+*.whl
